@@ -14,7 +14,7 @@ namespace ariel
         Node* _nextR;
         Node* _nextP;
         Node(std::string& data) : _data(data), _nextL(nullptr), _nextR(nullptr), _nextP(nullptr){}
-        ~Node(){}
+        ~Node();
         Node(const Node& other);
         Node& operator=(const Node& other);
         Node(Node&& other) noexcept;

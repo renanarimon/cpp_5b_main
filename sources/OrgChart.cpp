@@ -6,7 +6,6 @@
 
 namespace ariel
 {
-
     OrgChart::Node::Node(const Node &other)
         : _data(other._data), _nextL(other._nextL), _nextR(other._nextR), _nextP(other._nextP)
     {
@@ -16,6 +15,12 @@ namespace ariel
             v.push_back(child);
         }
         this->_children = v;
+    }
+
+    OrgChart::Node::~Node(){
+        for(Node* child : this->_children){
+            delete child;
+        }
     }
 
     OrgChart::Node &OrgChart::Node::operator=(const Node &other)
@@ -92,6 +97,7 @@ namespace ariel
     OrgChart::~OrgChart()
     {
         std::cout << "~OrgChart()" << std::endl;
+        delete this->_root;
     }
     OrgChart &OrgChart::add_root(std::string name)
     {
@@ -368,6 +374,7 @@ namespace ariel
     OrgChart::iterator::~iterator()
     {
         this->_curr = nullptr;
+        std::move(this->_flag);
         std::cout << "~iterator()" << std::endl;
     }
     std::string &OrgChart::iterator::operator*() const

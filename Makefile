@@ -31,13 +31,11 @@ StudentTest1.cpp:
 
 # Shauli Taragin
 StudentTest2.cpp: 
-	curl https://raw.githubusercontent.com/renanarimon/cpp_5b_test/master/Test.cpp > $@
-# curl https://raw.githubusercontent.com/ShauliTaragin/Orgchart-A/main/Test.cpp > $@
+	curl https://raw.githubusercontent.com/ShauliTaragin/Orgchart-A/main/Test.cpp > $@
 
 # Dvir Gev
 StudentTest3.cpp: 
-	curl https://raw.githubusercontent.com/renanarimon/cpp_5b_test/master/Test.cpp > $@
-# curl https://raw.githubusercontent.com/dvirGev/CPP--Ex5-par1/main/Test.cpp > $@
+	curl https://raw.githubusercontent.com/dvirGev/CPP--Ex5-par1/main/Test.cpp > $@
 
 tidy:
 	clang-tidy $(SOURCES) $(TIDY_FLAGS) --

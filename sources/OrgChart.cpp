@@ -6,6 +6,7 @@
 
 namespace ariel
 {
+    OrgChart::Node::Node(std::string& data) : _data(data), _nextL(nullptr), _nextR(nullptr), _nextP(nullptr){}
     OrgChart::Node::Node(const Node &other)
         : _data(other._data), _nextL(other._nextL), _nextR(other._nextR), _nextP(other._nextP)
     {
@@ -65,17 +66,14 @@ namespace ariel
 
     OrgChart::OrgChart()
     {
-        std::cout << "constructor OrgChart" << std::endl;
         this->_root = nullptr;
     }
     OrgChart::OrgChart(OrgChart &other)
     {
-        std::cout << "copy constructor OrgChart" << std::endl;
         this->_root = other._root;
     }
     OrgChart::OrgChart(OrgChart &&org) noexcept
     {
-        std::cout << "OrgChart(OrgChart &&org) noexcept" << std::endl;
         this->_root = org._root;
         org._root = nullptr;
     }
@@ -89,19 +87,16 @@ namespace ariel
     }
     OrgChart &OrgChart::operator=(OrgChart &&org) noexcept
     {
-        std::cout << "&OrgChart::operator=(OrgChart &&org)" << std::endl;
         this->_root = org._root;
         org._root = nullptr;
         return *this;
     }
     OrgChart::~OrgChart()
     {
-        std::cout << "~OrgChart()" << std::endl;
         delete this->_root;
     }
     OrgChart &OrgChart::add_root(std::string name)
     {
-        std::cout << "add_root: " << name << ", " << this << std::endl;
         if (this->_root != nullptr)
         {
             this->_root->_data = name;
@@ -121,7 +116,6 @@ namespace ariel
         {
             throw std::invalid_argument("employer doesn't exist");
         }
-        std::cout << "add_sub: " << employee << " to: " << *this << std::endl;
         Node *n = new Node(employee);
         if (n->_children.empty())
         {
@@ -355,8 +349,6 @@ namespace ariel
     OrgChart::iterator::iterator(const std::string& flag, OrgChart::Node *root)
         : _flag(flag), _curr(root)
     {
-        std::cout << "consructor iter: " << flag << ", root: " << root << std::endl;
-
         if (flag == "level")
         {
             BFS(root);
@@ -375,7 +367,6 @@ namespace ariel
     {
         this->_curr = nullptr;
         std::move(this->_flag);
-        std::cout << "~iterator()" << std::endl;
     }
     std::string &OrgChart::iterator::operator*() const
     {
@@ -387,13 +378,11 @@ namespace ariel
     }
     OrgChart::iterator::iterator(iterator &other)
     {
-        std::cout << "copy iterator" << std::endl;
         this->_curr = other._curr;
         this->_flag = other._flag;
     }
     OrgChart::iterator::iterator(iterator &&other) noexcept
     {
-        std::cout << "iterator(iterator &&other)" << std::endl;
         this->_curr = other._curr;
         this->_flag = other._flag;
         other._curr = nullptr;
@@ -409,7 +398,6 @@ namespace ariel
     }
     OrgChart::iterator &OrgChart::iterator::operator=(iterator &&other) noexcept
     { // TODO
-        std::cout << "operator=(iterator&& other)" << std::endl;
         this->_curr = other._curr;
         this->_flag = other._flag;
         other._curr = nullptr;

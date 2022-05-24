@@ -9,7 +9,15 @@ namespace ariel
     /*------------ Node constructors & destructor ------------*/
 
     /*constructor*/
-    OrgChart::Node::Node(std::string &data) : _data(data), _nextL(nullptr), _nextR(nullptr), _nextP(nullptr) {}
+    OrgChart::Node::Node(std::string &data) : _data(data), _nextL(nullptr), _nextR(nullptr), _nextP(nullptr) {
+        for (size_t i = 0; i < data.length(); i++)
+        {
+            if (isprint(data.at(i)) == 0)
+            {
+                throw std::invalid_argument("data contains not printable char");
+            }
+        }
+    }
 
     /*destructor*/
     OrgChart::Node::~Node()
